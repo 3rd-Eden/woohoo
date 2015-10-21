@@ -3,43 +3,39 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Woohoo</title>
+  <title>WooHoo -- Celebration as a Service</title>
+  <link href="https://nodeshop.nl/design.css" rel="stylesheet">
+  <link href="https://nodeshop.nl/css/base.min.css" rel="stylesheet">
 </head>
-<style>
-div {
-    min-height: 400px;
-    text-align: center;
-    font-size: 80px;
-    width:100%
-  }
-
-  #count {
-    font-size: 80px
-}
-
-#wohoo {
-  box-shadow: rgb(62, 115, 39) 0px 10px 14px -7px;
-  border-radius: 4px;
-  border: 1px solid rgb(75, 143, 41);
-  display: inline-block;
-  cursor: pointer;
-  color: rgb(255, 255, 255);
-  font-family: Arial;
-  font-size: 36px;
-  font-weight: bold;
-  padding: 6px 12px;
-  text-decoration: none;
-  text-shadow: rgb(91, 138, 60) 0px 1px 0px;
-  background: linear-gradient(rgb(119, 181, 90) 5%, rgb(114, 179, 82) 100%) rgb(119, 181, 90);
-}
-</style>
 <body>
-  <div>
-    <h1><a href="/" id="wohoo">WooHooo!</a></h1>
-    <div id="count">%count%</div>
+  <section class="accent spread">
+    <article class="container">
+      <h2>Celebration as a Service</h2>
 
-    woohoo.nodeshop.nl<br>
-  </div>
+      <h3>Finished an exercise?</h3>
+      <p>It's time for a celebration! Be proud of our achievement and press the button!</p>
+      <p>
+        Prefer CLI applications over a web-ui? Why not install our CLI client?
+        Simply run <strong>npm install -g woohoo</strong> and everytime you're in
+        the need of a small celebration just type <strong>woohoo</strong> and our
+        service will do the rest.
+      </p>
+
+      <button class="button" id="wohoo">Woohoo!</button>
+    </article>
+  </section>
+  <section>
+    <article class="container">
+      <h2>So far we've celebrated the completion of <span id="count">%count%</span> excersises</h2>
+    </article>
+  </section>
+  <section class="spread primary">
+    <div class="container">
+      <a href="https://nodeshop.nl">
+        <img src="https://nodeshop.nl/image/nodeshop.png" alt="Nodeshop.nl" width="100" />
+      </a>
+    </div>
+  <section>
 
   <audio id="woohoo" src="/woohoo/wav/woohoo.wav"></audio>
   <audio id="can-do" src="/woohoo/wav/can-do.wav"></audio>
