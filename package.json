@@ -1,0 +1,35 @@
+{
+  "name": "woohoo",
+  "version": "0.0.0",
+  "description": "Celebration as a Service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "woohoo": "./bin/woohoo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/3rd-Eden/woohoo.git"
+  },
+  "keywords": [
+    "woohoo",
+    "celebration"
+  ],
+  "author": "Arnout Kazemier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/3rd-Eden/woohoo/issues"
+  },
+  "homepage": "https://github.com/3rd-Eden/woohoo#readme",
+  "dependencies": {
+    "argh": "0.1.4",
+    "diagnostics": "1.0.1",
+    "one-time": "0.0.4",
+    "play": "git://github.com/marak/play.js.git#d3ca7a04d1bd58c3ad72df3088f92985742e41cc",
+    "primus": "3.2.3",
+    "serve-static": "1.10.0",
+    "ws": "0.8.0"
+  }
+}

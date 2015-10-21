@@ -1,0 +1,78 @@
+#!/usr/bin/env node
+'use strict';
+
+var debug = require('diagnostics')('woohoo:cli')
+  , player = require('play').Play()
+  , argv = require('argh').argv
+  , join = require('path').join
+  , Primus = require('primus')
+  , one = require('one-time')
+  , fs = require('fs')
+  , primus;
+
+//
+// Set some default command line arguments if they are not specified by the
+// user:
+// 
+// - play: What sound should be play.
+// - waas: Which Woohoo as a Service should we connect to.
+//
+argv.play = argv.play || 'woohoo';
+argv.waas = argv.waas || 'https://nodeshop.nl/woohoo';
+
+//
+// Validate that the sound exists.
+//
+if (!~fs.readdirSync(join(__dirname, '..', 'public', 'wav')).indexOf(argv.play +'.wav')) {
+  console.log();
+  console.log('Sorry, the sound '+ argv.play +' does not exist.');
+  return console.log();
+}
+
+debug('Playing %s on %s', argv.play, argv.waas);
+  
+//
+// Broadcast and play the first received woohoo!
+//
+Primus = require('primus').createSocket(require('../primus.json'));
+
+//
+// Connect to our woohoo as a service.
+//
+var primus = new Primus(argv.waas);
+
+primus.once('data', function data(payload) {
+  //
+  // Hack, the play module spams our CLI with console.log messages that we don't
+  // care about. Override console.log when we play things and restore it after
+  // playing.
+  //
+  var log = console.log;
+  console.log = function log() {};
+  
+  //
+  // Hack, the player doesn't do a callback execution when playing the sound
+  // fail, it instead chooses to just emit an `error` event. We want to capture
+  // both so we can close the connection.
+  //
+  var complete = one(function done() {
+    console.log = log;
+
+    debug('played %s', payload.play);
+
+    console.log('');
+    console.log('Woohoo! Congratulations! You\'re the '+ payload.count +'th who woohoo\'d');
+    console.log('');
+
+    primus.end();
+    process.exit();
+  });
+
+  //
+  // After all the hacks we can finally start playing.
+  //
+  player.sound(join(__dirname, '../public/wav/'+ payload.play +'.wav'), complete);
+  player.once('error', complete);
+});
+
+primus.write({ play: argv.play });

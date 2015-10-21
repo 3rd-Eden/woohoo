@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Woohoo</title>
+</head>
+<style>
+div {
+    min-height: 400px;
+    text-align: center;
+    font-size: 80px;
+    width:100%
+  }
+
+  #count {
+    font-size: 80px
+}
+
+#wohoo {
+  box-shadow: rgb(62, 115, 39) 0px 10px 14px -7px;
+  border-radius: 4px;
+  border: 1px solid rgb(75, 143, 41);
+  display: inline-block;
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+  font-family: Arial;
+  font-size: 36px;
+  font-weight: bold;
+  padding: 6px 12px;
+  text-decoration: none;
+  text-shadow: rgb(91, 138, 60) 0px 1px 0px;
+  background: linear-gradient(rgb(119, 181, 90) 5%, rgb(114, 179, 82) 100%) rgb(119, 181, 90);
+}
+</style>
+<body>
+  <div>
+    <h1><a href="/" id="wohoo">WooHooo!</a></h1>
+    <div id="count">%count%</div>
+
+    woohoo.nodeshop.nl<br>
+  </div>
+
+  <audio id="woohoo" src="/woohoo/wav/woohoo.wav"></audio>
+  <audio id="can-do" src="/woohoo/wav/can-do.wav"></audio>
+  <audio id="nooo" src="/woohoo/wav/nooo.wav"></audio>
+  <audio id="hacking" src="/woohoo/wav/hacking.wav"></audio>
+  <audio id="start" src="/woohoo/wav/start.wav"></audio>
+  <audio id="starting" src="/woohoo/wav/starting.wav"></audio>
+  <audio id="trusting" src="/woohoo/wav/trusting.wav"></audio>
+
+  <script src="/primus/primus.js"></script>
+  <script type="text/javascript">
+    var primus = Primus.connect('/')
+      , link = document.getElementById('wohoo')
+      , count = document.getElementById('count');
+
+    link.addEventListener('click', function select(e) {
+      e.preventDefault();
+
+      primus.write({ play: 'woohoo' });
+    });
+
+    primus.on('data', function received(data) {
+      if (!data || !data.count) return;
+
+      count.innerHTML = data.count;
+      document.getElementById(data.play).play();
+    });
+  </script>
+</body>
+</html>
+
