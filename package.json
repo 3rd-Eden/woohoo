@@ -28,8 +28,8 @@
     "diagnostics": "1.0.1",
     "one-time": "0.0.4",
     "play": "git://github.com/marak/play.js.git#d3ca7a04d1bd58c3ad72df3088f92985742e41cc",
-    "primus": "3.2.3",
-    "serve-static": "1.10.0",
-    "ws": "0.8.0"
+    "primus": "6.0.5",
+    "serve-static": "1.11.1",
+    "ws": "1.1.1"
   }
 }
